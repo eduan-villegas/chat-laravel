@@ -24,3 +24,8 @@ Route::group(['middleware' => 'api'], function($router) {
     Route::post('/refresh', "JWTController@refresh");
     Route::post('/profile', "JWTController@profile");
 });
+
+Route::group(['prefix' => 'users'], function($router) {
+    Route::post('/profile-user', "User\ProfileUserController@register");
+});
+

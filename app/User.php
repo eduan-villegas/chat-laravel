@@ -18,7 +18,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'surname' ,'email', 'password','phone','birthdate','website','address','avatar','fb','tw','inst','linke'
     ];
 
     /**
@@ -37,6 +37,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'birthdate' => 'datetime',
     ];
 
         /**
@@ -57,5 +58,11 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    function setPasswordAttribute($password) {
+        if($password){
+            $this->attributes["password"] = bcrypt($password);
+        }
     }
 }

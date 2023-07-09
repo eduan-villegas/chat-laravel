@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\User\ProfileUserGeneralResource;
 use Auth;
-use Validator;
+//use Validator;
+use Illuminate\Support\Facades\Validator;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -118,7 +120,7 @@ class JWTController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60,
-            'user' => auth('api')->user(),
+            'user' => ProfileUserGeneralResource::make(auth('api')->user()),
             //'user'=>[
             //    "name" => auth('api')->user()->name,
             //    "surname"=> auth('api')->user()->username,
